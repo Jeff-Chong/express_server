@@ -3,7 +3,7 @@ import logger from 'morgan'
 import express from 'express'
 import bodyParser from 'body-parser'
 import compression from 'compression'
-import { SERVER_PORT, makeExpressCallback } from './_helpers'
+import { SERVER_PORT, makeExpressCallback, resolvePathFromSrc } from './_helpers'
 
 import {
   getItems,
@@ -49,7 +49,7 @@ app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use('/files', express.static('public/files', {
+app.use('/files', express.static(resolvePathFromSrc('../public/files'), {
   maxAge: 1000 * 60 * 60 * 24 * 30
 }))
 app.use('/file', uploadImageRouter)
