@@ -1,0 +1,55 @@
+{
+  "name": "express-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && babel src -d dist",
+    "clean": "rimraf dist",
+    "start": "npm run clean && npm run build && cd dist && node index.js",
+    "test": "jest src --watch",
+    "test:e2e": "jest ./__test__ --watch",
+    "dev": "babel-node ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "verbose": false,
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js",
+    "testEnvironment": "./jest-mongo.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.4",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "babel-jest": "^26.3.0",
+    "eslint": "^7.7.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "faker": "^4.1.0",
+    "jest": "^26.4.2",
+    "jest-environment-node": "^26.3.0",
+    "mongodb-memory-server": "^4.0.2",
+    "morgan": "^1.10.0",
+    "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "cuid": "^2.1.8",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.0",
+    "multer": "^1.4.2"
+  }
+}
