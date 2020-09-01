@@ -37,27 +37,28 @@ export default function makeConstellationsDb ({ makeDb }) {
   // 只为当前数据而用
   function isNeedToUpdate (type, data) {
     let oDate
-    let nDate = Date.now()
+    // 调整时区 和 延后半小时
+    let nDate = Date.now() + (1000 * 60 * 60 * 8) - (1000 * 60 * 30)
     switch (type) {
       case 'today':
         oDate = data.date
-        nDate = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ''))
+        nDate = Number(new Date(nDate).toISOString().slice(0, 10).replace(/-/g, ''))
         break
       case 'tomorrow':
         oDate = data.date
-        nDate = Number(new Date().toISOString().slice(0, 10).replace(/-/g, '')) + 1
+        nDate = Number(new Date(nDate + (1000 * 60 * 60 * 24)).toISOString().slice(0, 10).replace(/-/g, ''))
         break
       case 'week':
         oDate = data.weekth
-        nDate = getWeekOfYear()
+        nDate = getWeekOfYear(nDate)
         break
       case 'month':
         oDate = data.month
-        nDate = new Date().getMonth() + 1
+        nDate = new Date(nDate).getMonth() + 1
         break
       case 'year':
         oDate = data.year
-        nDate = new Date().getFullYear()
+        nDate = new Date(nDate).getFullYear()
         break
       default:
         throw new Error('Unknown type')
@@ -77,8 +78,8 @@ export default function makeConstellationsDb ({ makeDb }) {
   }
 
   // 参考：https://blog.csdn.net/ziwen00/article/details/12579305
-  function getWeekOfYear () {
-    const checkDate = new Date()
+  function getWeekOfYear (timestamp) {
+    const checkDate = new Date(timestamp)
     checkDate.setDate(checkDate.getDate() + 4 - (checkDate.getDay() || 7))
     const time = checkDate.getTime()
     checkDate.setMonth(0)
