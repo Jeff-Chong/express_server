@@ -15,6 +15,8 @@ const CONSTELLATION_API_URL = process.env.JUHE_CONSTELLATIONS_API_URL
 const CONSTELLATIONS_APP_KEY = process.env.JUHE_CONSTELLATIONS_APP_KEY
 // exports.CONSTELLATIONS_APP_KEY = CONSTELLATIONS_APP_KEY
 
+const SOCKET_PORT = process.env.SOCKET_PORT || 8849
+
 const SERVER_PORT = process.env.SERVER_PORT || 8848
 const SERVER_BASE_URL = process.env.SERVER_BASE_URL
 
@@ -30,13 +32,17 @@ const CATEGORIES_DB_NAME = process.env.CATEGORIES_DB_NAME
 const HEROES_DB_URL = process.env.HEROES_DB_URL
 const HEROES_DB_NAME = process.env.HEROES_DB_NAME
 
-const ARTICLES_DB_URL = process.env.HEROES_DB_URL
-const ARTICLES_DB_NAME = process.env.HEROES_DB_NAME
+const BLOGS_DB_URL = process.env.BLOGS_DB_URL
+const BLOGS_DB_NAME = process.env.BLOGS_DB_NAME
+
+const ARTICLES_DB_URL = process.env.ARTICLES_DB_URL
+const ARTICLES_DB_NAME = process.env.ARTICLES_DB_NAME
 
 const USERS_DB_URL = process.env.USERS_DB_URL
 const USERS_DB_NAME = process.env.USERS_DB_NAME
 
 console.log(`
+  SOCKET_PORT：${SOCKET_PORT}\n
   SERVER_PORT: ${SERVER_PORT}\n
   SERVER_BASE_URL: ${SERVER_BASE_URL}\n
   JWT_SECRET: ${JWT_SECRET}\n
@@ -49,6 +55,8 @@ console.log(`
   HEROES_DB_NAME: ${HEROES_DB_NAME}\n
   ARTICLES_DB_URL: ${ARTICLES_DB_URL}\n
   ARTICLES_DB_NAME: ${ARTICLES_DB_NAME}\n
+  BLOGS_DB_URL: ${BLOGS_DB_URL}\n
+  BLOGS_DB_NAME: ${BLOGS_DB_NAME}\n
   USERS_DB_URL: ${USERS_DB_URL}\n
   USERS_DB_NAME: ${USERS_DB_NAME}\n
   CONSTELLATION_API_URL: ${CONSTELLATION_API_URL}\n
@@ -56,15 +64,17 @@ console.log(`
 `)
 
 if (!CONSTELLATIONS_APP_KEY) {
-  console.log('没有密钥，请设置 JUHE_CONSTELLATIONS_API_URL 环境变量')
+  console.error('没有密钥，请设置 JUHE_CONSTELLATIONS_API_URL 环境变量')
   process.exit(1)
 }
 if (!CONSTELLATION_API_URL) {
-  console.log('没有接口地址，请设置 JUHE_CONSTELLATIONS_APP_KEY 环境变量')
+  console.error('没有接口地址，请设置 JUHE_CONSTELLATIONS_APP_KEY 环境变量')
   process.exit(1)
 }
 
 export {
+  SOCKET_PORT,
+
   SERVER_PORT,
   SERVER_BASE_URL,
 
@@ -85,6 +95,9 @@ export {
 
   ARTICLES_DB_URL,
   ARTICLES_DB_NAME,
+
+  BLOGS_DB_URL,
+  BLOGS_DB_NAME,
 
   CONSTELLATION_API_URL,
   CONSTELLATIONS_APP_KEY
