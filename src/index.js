@@ -34,6 +34,13 @@ import {
 } from './article/controllers'
 
 import {
+  getBlogs,
+  postBlog,
+  patchBlog,
+  deleteBlog
+} from './blog/controllers'
+
+import {
   signIn,
   signUp
 } from './auth/controllers'
@@ -41,6 +48,8 @@ import {
 import { getConstellations } from './constellation/controllers'
 
 import uploadImageRouter from './file'
+import './socket'
+
 const app = express()
 
 app.use(cors())
@@ -80,6 +89,12 @@ app.get('/articles/:id', makeExpressCallback(getArticles))
 app.post('/articles', makeExpressCallback(postArticle))
 app.patch('/articles/:id', makeExpressCallback(patchArticle))
 app.delete('/articles/:id', makeExpressCallback(deleteArticle))
+
+app.get('/blogs', makeExpressCallback(getBlogs))
+app.get('/blogs/:id', makeExpressCallback(getBlogs))
+app.post('/blogs', makeExpressCallback(postBlog))
+app.patch('/blogs/:id', makeExpressCallback(patchBlog))
+app.delete('/blogs/:id', makeExpressCallback(deleteBlog))
 
 app.get('/constellations', makeExpressCallback(getConstellations))
 
